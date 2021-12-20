@@ -4,6 +4,15 @@ session_start();
 if (!$_SESSION['user_logged_in'] == true) {
     header("location: index.php");
 }
+require "./database/db_controller.php";
+$user_id = $_SESSION['user_id'];
+
+$sql  = "SELECT user_file_path,file_name FROM `user-file` WHERE user_id = $user_id";
+$execute = mysqli_query($con,$sql);
+if(!$execute){
+    $execute = "NULL";
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -70,7 +79,7 @@ if (!$_SESSION['user_logged_in'] == true) {
     <main>
         <section>
             <div class="container">
-                <div class="row">
+                <div class="row mt-5">
                     <h1 class="display-1">Upload pcap or pcapng file</h1>
                     <h2 class="display-6">to analyze network structure, HTTP headers and data, FTP, Telnet, WiFi, ARP, SSDP and other</h2>
                 </div>
@@ -91,29 +100,41 @@ if (!$_SESSION['user_logged_in'] == true) {
 
         <section>
             <div class="container mt-5">
-                <table class="table table-striped">
+                <table class="table table-hover">
                     <thead>
                         <th>
-                            Filename
+                            File Directory
                         </th>
                         <th>
-                            Date
+                            Filename
                         </th>
                         <th>
                             &nbsp;
                         </th>
                     </thead>
-                    <tbody>
+                    <?php if(!$execute){
+                            echo '<tbody>'; 
+                            echo '<td>Nill</td>';
+                            echo '<td>Nill</td>';
+                            echo '<td>Nill</td>';
+                            echo '</tbody>';
+                        } ?>
+                        <?php if($execute){ foreach($execute as $data){ ?>
+                        <tbody>
                         <td>
-                            File1.pncap
+                            <?php echo $data['user_file_path']; ?>
                         </td>
                         <td>
-                            21-11-2021
+                            <?php echo $data['file_name']; ?>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary">View Analysis</button>
+                            <form method="post" action="./file-analysis.php">
+                                <input type="hidden" value="<?php echo $data['user_file_path']; ?>" name="file_path">
+                                <button type="submit" class="btn btn-primary" name="file_analysis">View Analysis</button>
+                            </form>
                         </td>
-                    </tbody>
+                        </tbody>
+                        <?php }} ?>
                 </table>
             </div>
         </section>

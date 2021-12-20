@@ -28,7 +28,7 @@ if (isset($_POST['sign-in'])) {
                 echo "test3";
                 mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
                 if (mysqli_stmt_fetch($stmt)) {
-                    echo "test4";
+                    echo "test4  ";
                     if (password_verify($password, $hashed_password)) {
                         echo "test5";
                         $_SESSION['user_id'] = $id;

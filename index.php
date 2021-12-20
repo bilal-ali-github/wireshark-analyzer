@@ -139,13 +139,13 @@
                           Analyse pcap files to view HTTP headers and data, extract transferred binaries, files, office documents, pictures and find passwords.
                         </p>
                         <div class="row">
-                            <div class="offset-9 col-3 mt-5">
+                            <div class="text-center mt-5">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">Upload File</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 text-center">
-                      <a href="https://www.youtube.com/embed/2KJMNSGtekM?autoplay=1"><img src="https://img.youtube.com/vi/2KJMNSGtekM/hqdefault.jpg" class="img-fluid img-thumbnail" alt="A-Packets Online pcap analyzer"><span class="play-button">▶</span></a>
+                      <a href="https://www.youtube.com/embed/2KJMNSGtekM?autoplay=1"><img src="https://img.youtube.com/vi/2KJMNSGtekM/hqdefault.jpg" class="img-fluid img-thumbnail" alt="A-Packets Online pcap analyzer"></a>
                     </div>
                 </div>
             </div>

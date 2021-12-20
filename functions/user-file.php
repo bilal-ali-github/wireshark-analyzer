@@ -13,22 +13,21 @@ if (!$_SESSION['user_id']) {
 } else {
     $user_id = $_SESSION['user_id'];
 }
-// if (isset($_POST['submit-file'])) {
-    echo "test1";
-    if (!is_dir('../files/users')) {
-        mkdir('../files/users');
+if (isset($_POST['submit-file'])) {
+    if (!is_dir('../files')) {
+        mkdir('../files');
     }
-    $filename = $user_id.$_FILES['user_file']['name'];
+    $filename = $_FILES['user_file']['name'];
     $tempname = $_FILES['user_file']['tmp_name'];
-    $folder = "./files/users/" . $filename;
-    move_uploaded_file($tempname, "../files/users/" . $filename);
-    $sql = "INSERT INTO `user-file`(user_id,user_file_path) VALUES($user_id,'$folder')";
+    $folder = "./files/" . $filename;
+    move_uploaded_file($tempname, "../files/" . $filename);
+    $sql = "INSERT INTO `user-file`(user_id,user_file_path,file_name) VALUES($user_id,'$folder','$filename')";
     $stmt = mysqli_query($con, $sql);
     var_dump($stmt);
     mysqli_close($con);
     if($stmt){
         header("location: ../user-interface.php");
     }
-// }
+}
 
 ?>
